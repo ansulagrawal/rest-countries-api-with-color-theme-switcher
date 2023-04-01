@@ -11,7 +11,7 @@ const AppProvider = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [options, setOptions] = useState(allRegions.map(region => ({ value: region, label: region })));
   const [selectedOption, setSelectedOption] = useState("");
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
 
   const toggleTheme = () => setTheme(theme => (theme === "light" ? "dark" : "light"));
 
