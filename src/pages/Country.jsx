@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { useNavigate, useLoaderData } from "react-router-dom";
 import { ArrowLeft } from "../assets";
+import { BASE_URL } from "../config/api";
 
 export async function loader({ params }) {
-  const res = await fetch(`https://restcountries.com/v3.1/name/${params.id}`, { cache: "no-cache" });
+  const res = await fetch(`${BASE_URL}/name/${params.id}?fullText=true`, { cache: "no-cache" });
 
   if (!res.ok) return { error: true, message: "Something went wrong!" };
 
@@ -23,7 +24,7 @@ export default function Country() {
       if (!loaderData[0].borders) return;
 
       const borders = loaderData[0].borders.join(",");
-      const res = await fetch(`https://restcountries.com/v3.1/alpha?codes=${borders}`, { cache: "no-cache" });
+      const res = await fetch(`${BASE_URL}/alpha?codes=${borders}`, { cache: "no-cache" });
 
       const data = await res.json();
       setCountryFullName([...data.map(country => country.name.common)]);
@@ -45,7 +46,8 @@ export default function Country() {
   } = loaderData[0] || { flags: {}, name: {} };
 
   const languagesValues = Object.values(languages || {})?.join(", ");
-
+  const currencyValue = Object.values(currencies || {})?.map(currency => currency?.name)?.join(', ');
+  const nativeNameValue = Object.values(nativeName || {})?.map(nName => nName?.common)?.join(', ');
   const memoizedCountryFullName = useMemo(() => countryFullName, [countryFullName]);
 
   return (
@@ -63,11 +65,11 @@ export default function Country() {
           <div className="flex flex-wrap gap-[30px] justify-between flex-col lg:flex-row  mt-[30px]">
             <div className="flex flex-col gap-2">
               <h6 className="font-semiBold text-[18px]">
-                Native Name: <span className="font-light">{nativeName?.[Object.keys(nativeName)[0]]?.common || ""}</span>
+                Native Name: <span className="font-light">{nativeNameValue}</span>
               </h6>
               <h6 className="font-semiBold text-[18px]">
                 Population:
-                <span className="font-light">{population.toLocaleString()}</span>
+                <span className="font-light">{population?.toLocaleString()}</span>
               </h6>
               <h6 className="font-semiBold text-[18px]">
                 Region:
@@ -85,7 +87,7 @@ export default function Country() {
                 Top Level Domain: <span className="font-light">{tld}</span>
               </h6>
               <h6 className="font-semiBold text-[18px]">
-                Currencies: <span className="font-light">{currencies?.[Object.keys(currencies)].name}</span>
+                Currencies: <span className="font-light">{currencyValue}</span>
               </h6>
               <h6 className="font-semiBold text-[18px]">
                 Languages: <span className="font-light">{languagesValues}</span>

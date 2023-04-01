@@ -5,13 +5,12 @@ import DropdownMenu from "../components/DropdownMenu";
 import Cards from "../components/Cards";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
+import { BASE_URL } from "../config/api";
 
 export async function loader({ request }) {
   const url = new URL(request.url);
   const name = url.searchParams.get("name");
   const region = url.searchParams.get("region");
-
-  const apiUrl = "https://restcountries.com/v3.1";
 
   let endpoint = "/all";
   if (name) {
@@ -20,7 +19,7 @@ export async function loader({ request }) {
     endpoint = `/region/${region}`;
   }
 
-  const response = await fetch(apiUrl + endpoint, { cache: "no-cache" });
+  const response = await fetch(BASE_URL + endpoint, { cache: "no-cache" });
 
   if (!response.ok) {
     return { error: true, data: [] };
