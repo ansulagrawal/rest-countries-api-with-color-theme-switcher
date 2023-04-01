@@ -1,24 +1,29 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Home from "./pages/Home.jsx";
-import SingleCountry from "./pages/SingleCountry.jsx";
-import { useGlobalContext } from "./context";
-import "./index.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import RootElement from "./pages/RootElement";
+import Home, { loader as formLoader } from "./pages/Home";
+import { ContextProvider } from "./context/context";
+import Country, { loader as countryLoader } from "./pages/Country";
 
-function App() {
-  const { theme } = useGlobalContext();
-  return (
-    <div id={theme} className="app">
-      <Navbar />
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/:name" element={<SingleCountry />} />
-        </Routes>
-      </Router>
-    </div>
-  );
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <ContextProvider>
+        <RootElement />
+      </ContextProvider>
+    ),
+    children: [
+      {
+        index: true,
+        element: <Home />,
+        loader: formLoader,
+      },
+      { path: ":id", element: <Country />, loader: countryLoader },
+    ],
+  },
+]);
+
+export default function App() {
+  return <RouterProvider router={router} />;
 }
-
-export default App;
