@@ -15,7 +15,7 @@ export default function Navbar() {
         </Link>
         <button className="flex items-center gap-[10px]" onClick={darkModeHandler}>
           <Moon dark={theme} className="w-[20px] h-[20px]" />
-          <span className="text-[14px] md:text-[17px]">Dark Mode</span>
+          <span className="text-[14px] md:text-[17px]">{theme ? "Light" : "Dark"} Mode</span>
         </button>
       </div>
     </nav>
