@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from "react";
+import React, { useState, createContext } from "react";
 
 const context = createContext();
 
@@ -20,6 +20,7 @@ export function ContextProvider({ children }) {
       localStorage.setItem("theme", !prevTheme);
       return !prevTheme;
     });
+
     document.documentElement.classList.toggle("dark");
   }
 
@@ -35,6 +36,7 @@ export function ContextProvider({ children }) {
   function toggleMenuHandler() {
     setToggleList(prevToggleList => !prevToggleList);
   }
+
   const data = { theme, darkModeHandler, dropdownMenuTitle, changeTitle, defaultTitle, toggleList, toggleMenuHandler };
 
   return <context.Provider value={data}>{children}</context.Provider>;
