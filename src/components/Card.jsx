@@ -7,7 +7,7 @@ export default function Card({ data: { flags, name, population, region, capital 
         <img src={flags.png} alt={`${flags.alt} Flag`} className="h-full w-full object-fill" />
       </div>
       <div className="pt-[30px] px-[25px]">
-        <h3 className="font-extraBold text-[20px]">{name.common}</h3>
+        <h2 className="font-extraBold text-[20px]">{name.common}</h2>
         <p className="font-semiBold text-[16px] mt-[20px]">
           Population: <span className="font-light">{population}</span>
         </p>

@@ -22,12 +22,12 @@ export default function DropdownMenu() {
 
   return (
     <div className="relative w-[245px]">
-      <div
-        className="flex justify-between items-center shadow rounded-md text-color bg-color-component cursor-pointer px-[25px] py-5 md:px-[30] transition duration-300 ease-in-out"
+      <button
+        className="w-[245px] flex justify-between items-center shadow rounded-md text-color bg-color-component cursor-pointer px-[25px] py-5 md:px-[30] transition duration-300 ease-in-out"
         onClick={toggleMenuHandler}>
-        <h4>{dropdownMenuTitle}</h4>
+        <span>{dropdownMenuTitle}</span>
         <ChevronDown className="w-[20px] h-[20px]" />
-      </div>
+      </button>
       {toggleList && (
         <Form
           className="flex flex-col gap-[15px] px-[25px] py-5 md:px-[30px] text-color bg-color-component shadow rounded-md absolute top-[70px] left-0 right-0 transition duration-300 ease-in-out"

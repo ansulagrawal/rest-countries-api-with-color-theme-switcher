@@ -6,11 +6,11 @@ export default function Cards({ data }) {
   return (
     <ul className="w-auto flex flex-wrap justify-center gap-[50px]">
       {data.map(({ name, ...rest }) => (
-        <Link to={`${name.common.toLowerCase()}`} key={name.common}>
-          <li>
+        <li key={name.common}>
+          <Link to={`${name.common.toLowerCase()}`}>
             <Card data={{ name, ...rest }} />
-          </li>
-        </Link>
+          </Link>
+        </li>
       ))}
     </ul>
   );

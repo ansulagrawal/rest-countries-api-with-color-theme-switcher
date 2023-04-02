@@ -35,12 +35,12 @@ export default function Home() {
   const { error, data } = useLoaderData();
 
   return (
-    <div className={`max-w-[1440px] mx-auto flex flex-col gap-[50px] ${error ? "gap-[150px]" : ""} padding-x py-[30px] md:py-[80px]`}>
+    <main className={`max-w-[1440px] mx-auto flex flex-col gap-[50px] ${error ? "gap-[150px]" : ""} padding-x py-[30px] md:py-[80px]`}>
       <div className="flex flex-wrap justify-between items-start gap-[50px]">
         <SearchBar />
         <DropdownMenu />
       </div>
       {error ? <Error /> : navigation.state === "loading" ? <Loading /> : <Cards data={data} />}
-    </div>
+    </main>
   );
 }

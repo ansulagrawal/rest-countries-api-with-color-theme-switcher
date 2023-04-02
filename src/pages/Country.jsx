@@ -51,7 +51,7 @@ export default function Country() {
   const memoizedCountryFullName = useMemo(() => countryFullName, [countryFullName]);
 
   return (
-    <div className="text-color max-w-[1440px] mx-auto padding-x mt-[80px]">
+    <main className="text-color max-w-[1440px] mx-auto padding-x mt-[80px]">
       <button className="flex items-center gap-3 bg-color-component text-color px-[30px] py-[10px] rounded-md shadow-md" onClick={goBack}>
         <ArrowLeft className="w-[20px] h-[20px]" />
         <span className="text-[18px]">Back</span>
@@ -104,6 +104,6 @@ export default function Country() {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
