@@ -22,7 +22,7 @@ const router = createBrowserRouter([
       { path: ":id", element: <Country />, loader: countryLoader },
     ],
   },
-]);
+], {basename: '/rest-countries-api-with-color-theme-switcher'});
 
 export default function App() {
   return <RouterProvider router={router} />;
