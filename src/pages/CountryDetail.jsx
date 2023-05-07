@@ -88,9 +88,11 @@ function CountryDetail() {
                   Independent: <span className='font-light'>{independent ? 'Self Governing' : 'Non Self Governing'}</span>
                 </h6>
                 <h6 className='font-semiBold text-[18px] mt-2'>
-                  <a className='font-light px-[25px] py-[10px] bg-color-component shadow-md rounded-md' href={maps?.googleMaps} target='_blank'>
-                    View on map
-                  </a>
+                  {maps?.googleMaps && (
+                    <a className='font-light px-[25px] py-[10px] bg-color-component shadow-md rounded-md' href={maps.googleMaps} target='_blank'>
+                      View on map
+                    </a>
+                  )}
                 </h6>
               </div>
             </div>
