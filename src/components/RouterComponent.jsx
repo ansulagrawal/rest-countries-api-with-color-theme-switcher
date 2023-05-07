@@ -1,8 +1,8 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from '../pages/home.jsx';
-import Country from '../pages/Country.jsx';
-import CountryDetail from '../pages/CountryDetail.jsx';
+import Home from '../pages/home';
+import Country from '../pages/Country';
+import CountryDetail from '../pages/CountryDetail';
 
 const router = createBrowserRouter([
   {
