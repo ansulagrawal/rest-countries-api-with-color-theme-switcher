@@ -1,17 +1,40 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Card from "./Card";
+import React from 'react';
+import Card from './Card';
+import { useGetAllCountriesQuery } from '../app/apiSlices/api';
+import { Link } from 'react-router-dom';
+import Loading from './Loading.jsx';
+import NotFound from './NotFound.jsx';
 
-export default function Cards({ data }) {
+const Cards = ({ search, setSearch, setText }) => {
+  const { data, isLoading, isError } = useGetAllCountriesQuery(search.get('search') || '');
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return (
+      <NotFound
+        setSearch={setSearch}
+        action={() => {
+          setText('');
+          setSearch({ search: '' });
+        }}
+      />
+    );
+  }
+
   return (
-    <ul className="w-auto flex flex-wrap justify-center gap-[50px]">
-      {data.map(({ name, ...rest }) => (
-        <li key={name.common}>
-          <Link to={`${name.common.toLowerCase()}`}>
-            <Card data={{ name, ...rest }} />
+    <div className='w-auto flex flex-wrap gap-[100px] justify-center'>
+      {data?.map(data => (
+        <li key={data?.name.common} className='list-none'>
+          <Link to={`${data?.name.common.toLowerCase()}`}>
+            <Card data={data} />
           </Link>
         </li>
       ))}
-    </ul>
+    </div>
   );
-}
+};
+
+export default Cards;

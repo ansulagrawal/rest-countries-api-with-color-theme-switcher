@@ -1,23 +1,41 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import { Moon } from "../assets";
-import context from "../context/context";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Moon from '../assets/Moon.jsx';
 
-export default function Navbar() {
-  const { theme, darkModeHandler, defaultTitle } = useContext(context);
+const navbar = () => {
+  const [dark, setDark] = useState(() => {
+    if (localStorage.getItem('mode') === 'true') {
+      document.documentElement.classList.add('dark');
+      return true;
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    if (!localStorage.getItem('mode')) {
+      localStorage.setItem('mode', true);
+      setDark(true);
+    }
+  });
+  const darkModeHandler = () => {
+    setDark(!dark);
+    localStorage.setItem('mode', !dark);
+    document.documentElement.classList.toggle('dark');
+  };
+
   return (
-    <nav className="text-color bg-color-component shadow ease-in-out duration-300">
-      <div className="max-w-[1440px] mx-auto padding-x py-[40px] w-full flex justify-between items-center md:py-[30px] ">
-        <Link to="/">
-          <h1 className="text[17px] font-extraBold cursor-pointer md:text-[32px] " onClick={defaultTitle}>
-            Where in the world?
-          </h1>
+    <nav className='bg-white text-color bg-color-component border-gray-200 dark:bg-gray-900 sticky top-0 left-0 right-0 z-10'>
+      <div className='max-w-screen-xl min-h-[70px] flex flex-wrap items-center justify-between mx-auto p-4'>
+        <Link to='/' className='flex items-center'>
+          <span className='self-center text-2xl font-extraBold whitespace-nowrap dark:text-white'>Where in the world?</span>
         </Link>
-        <button className="flex items-center gap-[10px]" onClick={darkModeHandler}>
-          <Moon dark={theme} className="w-[20px] h-[20px]" />
-          <span className="text-[14px] md:text-[17px]">{theme ? "Light" : "Dark"} Mode</span>
+        <button className='flex items-center gap-[10px]' onClick={darkModeHandler}>
+          <Moon dark={dark} className='w-[20px] h-[20px]' />
+          <span className='text-[14px] md:text-[17px]'>{dark ? 'Light' : 'Dark'} Mode</span>
         </button>
       </div>
     </nav>
   );
-}
+};
+
+export default navbar;
