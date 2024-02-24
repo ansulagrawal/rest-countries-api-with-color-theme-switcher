@@ -89,7 +89,7 @@ function CountryDetail() {
                 </h6>
                 <h6 className='font-semiBold text-[18px] mt-2'>
                   {maps?.googleMaps && (
-                    <a className='font-light px-[25px] py-[10px] bg-color-component shadow-md rounded-md' href={maps.googleMaps} target='_blank'>
+                    <a className='font-light px-[25px] py-[10px] bg-color-component shadow-md rounded-md' href={maps.googleMaps} target='_blank' rel='noreferrer noreferrer'>
                       View on map
                     </a>
                   )}
